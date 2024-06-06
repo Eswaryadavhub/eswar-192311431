@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 100
+Struct Stack {
+int top;
+int array[MAX_SIZE];
+};
+struct Stack* createStack() {
+struct Stack* stack = (struct Stack*)malloc(sizeof(struct Stack));
+stack->top = -1;
+return stack;
+}
+int isEmpty(struct Stack* stack) {
+return (stack->top == -1);
+}
+void push(struct Stack* stack, int item) {
+if (stack->top == MAX_SIZE - 1) {
+printf("Stack Overflow\n");
+return;
+}
+stack->array[++stack->top] = item;
+printf("%d pushed to stack\n", item);
+}
+int pop(struct Stack* stack) {
+if (isEmpty(stack)) {
+printf("Stack Underflow\n");
+return -1;
+}
+return stack->array[stack->top--];
+}
+int peek(struct Stack* stack) {
+if (isEmpty(stack)) {
+printf("Stack is empty\n");
+return -1;
+}
+return stack->array[stack->top];
+}
+int main() {
+struct Stack* stack = createStack();
+push(stack, 10);
+push(stack, 20);
+push(stack, 30);
+printf("%d popped from stack\n", pop(stack));
+printf("Top element of stack: %d\n", peek(stack));
+return 0;
+}
+
+INPUT/OUTPUT:
+10 pushed to stack
+20 pushed to stack
+30 pushed to stack
+30 popped from stack
+Top element of stack: 20
